@@ -1,10 +1,6 @@
 {
   "name": "asharp",
   "version": "0.0.1",
-  "types": "build/index.d.ts",
-  "files": [
-    "build/**/*.{js|css|d.ts|map}"
-  ],
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.7",

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>R-Sharp</title>
+    <style>
+      #grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-items: center;
+        align-items: center;
+      }
+
+      .note {
+        font-size: 3rem;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="request-for-audio-stream">Request for audio stream</button>
+    <div id="grid">
+      <rsp-note-renderer id="expected-note-renderer"></rsp-note-renderer>
+      <div id="expected-note" class="note"></div>
+      <rsp-note-renderer id="played-note-renderer"></rsp-note-renderer>
+      <div id="played-note" class="note"></div>
+    </div>
+    <script src="./index.ts"></script>
+  </body>
+</html>

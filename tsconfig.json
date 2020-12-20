@@ -1,25 +1,22 @@
 {
-  "exclude": ["node_modules", "webpack", "build"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "declaration": true,
-    "declarationDir": "build",
+    "declarationDir": "pkg",
     "esModuleInterop": true,
+    "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react",
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "outDir": "build",
-    "paths": {
-      "peer-deps-externals-webpack-plugin": ["./custom.d.ts"]
-    },
+    "outDir": "pkg",
     "resolveJsonModule": true,
-    "rootDir": "./src",
+    "rootDir": "lib",
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es5"
+    "target": "es6"
   }
 }

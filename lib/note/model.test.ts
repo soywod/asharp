@@ -1,28 +1,28 @@
-import {parseNote, nextNote, siblingNote, formatNote, rangeNote} from "./note"
+import {parseNote, nextNote, siblingNote, formatNote, rangeNote} from "./note";
 
 it("should parse flat with octave", () => {
-  const note = parseNote("Ab/1")
+  const note = parseNote("Ab/1");
 
-  expect(note.key).toBe("A")
-  expect(note.accidental).toBe("flat")
-  expect(note.octave).toBe(1)
-})
+  expect(note.key).toBe("A");
+  expect(note.accidental).toBe("flat");
+  expect(note.octave).toBe(1);
+});
 
 it("should parse natural with octave", () => {
-  const note = parseNote("A/2")
+  const note = parseNote("A/2");
 
-  expect(note.key).toBe("A")
-  expect(note.accidental).toBe("natural")
-  expect(note.octave).toBe(2)
-})
+  expect(note.key).toBe("A");
+  expect(note.accidental).toBe("natural");
+  expect(note.octave).toBe(2);
+});
 
 it("should parse natural without octave", () => {
-  const note = parseNote("A#")
+  const note = parseNote("A#");
 
-  expect(note.key).toBe("A")
-  expect(note.accidental).toBe("sharp")
-  expect(note.octave).toBeUndefined()
-})
+  expect(note.key).toBe("A");
+  expect(note.accidental).toBe("sharp");
+  expect(note.octave).toBeUndefined();
+});
 
 it("should get next", () => {
   const cases = [
@@ -46,14 +46,14 @@ it("should get next", () => {
     ["Gb/2", "G/2"],
     ["G/2", "G#/2"],
     ["G#/2", "A/2"],
-  ]
+  ];
 
   cases.forEach(([noteFormat, expectedNextFormat]) => {
-    const note = parseNote(noteFormat!)
-    const next = nextNote(note)
-    expect(formatNote(next)).toBe(expectedNextFormat)
-  })
-})
+    const note = parseNote(noteFormat!);
+    const next = nextNote(note);
+    expect(formatNote(next)).toBe(expectedNextFormat);
+  });
+});
 
 it("should get sibling", () => {
   const cases = [
@@ -77,23 +77,23 @@ it("should get sibling", () => {
     ["Gb/2", "F#/2"],
     ["G/2", null],
     ["G#/2", "Ab/2"],
-  ]
+  ];
 
   cases.forEach(([noteFormat, expectedSiblingFormat]) => {
-    const note = parseNote(noteFormat!)
-    const sibling = siblingNote(note)
+    const note = parseNote(noteFormat!);
+    const sibling = siblingNote(note);
 
     if (!expectedSiblingFormat) {
-      expect(sibling).toBeNull()
+      expect(sibling).toBeNull();
     } else {
-      expect(sibling).not.toBeNull()
+      expect(sibling).not.toBeNull();
       if (sibling) {
-        const siblingFormat = formatNote(sibling)
-        sibling && expect(siblingFormat).toBe(expectedSiblingFormat)
+        const siblingFormat = formatNote(sibling);
+        sibling && expect(siblingFormat).toBe(expectedSiblingFormat);
       }
     }
-  })
-})
+  });
+});
 
 it("should get range", () => {
   const cases = [
@@ -105,13 +105,13 @@ it("should get range", () => {
       ["C/2", "E/2"],
       ["C/2", "C#/2", "D/2", "D#/2", "E/2"],
     ],
-  ]
+  ];
 
   cases.forEach(([[minFormat, maxFormat], expectedRangeFormat]) => {
-    const range = rangeNote(minFormat, maxFormat)
-    const expectedRange = expectedRangeFormat.map(parseNote)
+    const range = rangeNote(minFormat, maxFormat);
+    const expectedRange = expectedRangeFormat.map(parseNote);
 
-    expect(range).toHaveLength(expectedRange.length)
-    expect(range).toMatchObject(expectedRange)
-  })
-})
+    expect(range).toHaveLength(expectedRange.length);
+    expect(range).toMatchObject(expectedRange);
+  });
+});

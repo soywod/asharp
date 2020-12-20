@@ -39,6 +39,7 @@
   },
   "scripts": {
     "start": "parcel serve -p 3000 lib/index.html",
+    "test": "yarn jest",
     "prebuild": "tsc --noEmit",
     "build": "parcel build -d pkg lib/index.html",
     "postbuild": "cp static/_redirects pkg/"

@@ -1,7 +1,7 @@
-import {parseNote, nextNote, siblingNote, formatNote, rangeNote} from "./note";
+import {noteOfString, nextNote, siblingNote, noteToString, rangeNote} from "./model";
 
 it("should parse flat with octave", () => {
-  const note = parseNote("Ab/1");
+  const note = noteOfString("Ab/1");
 
   expect(note.key).toBe("A");
   expect(note.accidental).toBe("flat");
@@ -9,7 +9,7 @@ it("should parse flat with octave", () => {
 });
 
 it("should parse natural with octave", () => {
-  const note = parseNote("A/2");
+  const note = noteOfString("A/2");
 
   expect(note.key).toBe("A");
   expect(note.accidental).toBe("natural");
@@ -17,7 +17,7 @@ it("should parse natural with octave", () => {
 });
 
 it("should parse natural without octave", () => {
-  const note = parseNote("A#");
+  const note = noteOfString("A#");
 
   expect(note.key).toBe("A");
   expect(note.accidental).toBe("sharp");
@@ -49,9 +49,9 @@ it("should get next", () => {
   ];
 
   cases.forEach(([noteFormat, expectedNextFormat]) => {
-    const note = parseNote(noteFormat!);
+    const note = noteOfString(noteFormat!);
     const next = nextNote(note);
-    expect(formatNote(next)).toBe(expectedNextFormat);
+    expect(noteToString(next)).toBe(expectedNextFormat);
   });
 });
 
@@ -80,7 +80,7 @@ it("should get sibling", () => {
   ];
 
   cases.forEach(([noteFormat, expectedSiblingFormat]) => {
-    const note = parseNote(noteFormat!);
+    const note = noteOfString(noteFormat!);
     const sibling = siblingNote(note);
 
     if (!expectedSiblingFormat) {
@@ -88,7 +88,7 @@ it("should get sibling", () => {
     } else {
       expect(sibling).not.toBeNull();
       if (sibling) {
-        const siblingFormat = formatNote(sibling);
+        const siblingFormat = noteToString(sibling);
         sibling && expect(siblingFormat).toBe(expectedSiblingFormat);
       }
     }
@@ -109,7 +109,7 @@ it("should get range", () => {
 
   cases.forEach(([[minFormat, maxFormat], expectedRangeFormat]) => {
     const range = rangeNote(minFormat, maxFormat);
-    const expectedRange = expectedRangeFormat.map(parseNote);
+    const expectedRange = expectedRangeFormat.map(noteOfString);
 
     expect(range).toHaveLength(expectedRange.length);
     expect(range).toMatchObject(expectedRange);
